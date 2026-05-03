@@ -24,18 +24,15 @@ export type Press = {
 
   /* 일부 글자만 강조 */
   accent?: string; // 강조 색
-  accentChar?: number; // 강조될 글자 인덱스
-  accentUnder?: number[]; // accent 색 underline 인덱스 배열
-  accentBg?: boolean; // accent 글자가 chip 배경으로 처리
+  accentChars?: number[]; // 강조 색이 적용될 글자 인덱스들 (연속이든 비연속이든)
+  accentUnder?: number[]; // accent 색 underline이 적용될 글자 인덱스들
+  accentBg?: boolean; // accentChars가 색 대신 chip 배경으로 처리
 
   /* 기타 플래그 */
   flag?: boolean; // 빨간 국기 글리프 (아시아경제)
   latin?: boolean; // 라틴 텍스트 — 한글 -0.01em tracking 비활성
   small?: boolean; // 14px (긴 라틴 이름)
 };
-
-const INK = "var(--ink)";
-const ACCENT = "var(--accent)"; // 디자인 시스템 indigo — 본래 두 곳에만 쓰여야 하나 워드마크에선 별도 hex 사용
 
 /* ============================================================
  * Page 1 (cells 1-24) — 디자인 프레임 01·02 정확히 반영
@@ -48,7 +45,7 @@ const PAGE_1: Press[] = [
     name: "헤럴드경제",
     category: "general",
     accent: "#1A75CF",
-    accentChar: 0,
+    accentChars: [0],
   },
   {
     id: "sbs-biz",
@@ -57,7 +54,7 @@ const PAGE_1: Press[] = [
     latin: true,
     tracking: "0.04em",
     accent: "#1A75CF",
-    accentChar: 3,
+    accentChars: [3, 4, 5],
   },
   { id: "sege-ilbo", name: "세계일보", category: "general" },
   {

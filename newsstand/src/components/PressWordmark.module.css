@@ -1,0 +1,73 @@
+.wordmark {
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  max-width: 88%;
+  text-align: center;
+  word-break: keep-all;
+  line-height: 1.15;
+
+  /* 기본 타이포 — 디자인 §6.5: 16px, weight는 props로 override 가능 */
+  font-size: var(--type-heading-size);
+  font-family: var(--font-sans);
+  color: var(--ink);
+}
+
+/* small=true (긴 라틴 이름) → 14px */
+.small {
+  font-size: var(--type-list-size);
+}
+
+/* family=serif */
+.serif {
+  font-family: var(--font-serif);
+}
+
+/* italic=true */
+.italic {
+  font-style: italic;
+}
+
+/* underline=true (전체 텍스트) */
+.underline {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  text-decoration-thickness: 1px;
+}
+
+/* bg가 있을 때 — 전체 워드마크가 chip이 됨 */
+.chip {
+  padding: 2px 8px;
+  border-radius: var(--r-sub);
+}
+
+/* accent char (color 적용) */
+.accent {
+  /* color는 inline style로 props에서 받음 */
+}
+
+/* accent char (chip 적용) — accentBg=true */
+.accentChip {
+  padding: 0 4px;
+  border-radius: var(--r-sub);
+  color: #fff;
+}
+
+/* accent underline */
+.accentUnder {
+  text-decoration: underline;
+  text-decoration-thickness: 1.5px;
+  text-underline-offset: 3px;
+  /* text-decoration-color는 inline style로 */
+}
+
+/* 빨간 국기 글리프 (아시아경제) */
+.flag {
+  display: inline-block;
+  width: 6px;
+  height: 9px;
+  margin-left: 2px;
+  vertical-align: middle;
+  flex: none;
+}
