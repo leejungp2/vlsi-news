@@ -6,7 +6,7 @@ React 19 + Vite + TypeScript · 1280×720 고정 캔버스
 ## 문서
 
 - [docs/checklist.md](docs/checklist.md) — 16-커밋 체크리스트, 학습 목표, 개발 워크플로, 커밋 메시지 양식
-- [CLAUDE.md](CLAUDE.md) — 프로젝트 규칙 (스택, 토큰 제약, 워크플로 규칙)
+- [CLAUDE.md](CLAUDE.md) — 프로젝트 규칙 (스택, 토큰 제약, 워크플로 규칙 설정)
 - [news_design.pdf](news_design.pdf) — 디자인 시스템 (토큰, 컴포넌트 스펙)
 - [news_plan.pdf](news_plan.pdf) — 기획 (6개 프레임)
 
@@ -26,3 +26,4 @@ cd newsstand
 npm install
 npm run dev
 ```
+
