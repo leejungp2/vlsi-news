@@ -1,0 +1,107 @@
+:root {
+  /* ============================================================
+   * Colors  (design.pdf §2)
+   * ============================================================ */
+  --ink: #14212b;
+  --ink-alt: #14202b;
+  --sub: #5f6e76;
+  --mute: #879298;
+  --line: #d2dae0;
+  --soft: #f5f7f9;
+  --soft-alt: #f7f7fc;
+  --card: #ffffff;
+  --page: #fefefe;
+  --accent: #7890e7;
+  --accent-deep: #4362d0;
+  --badge-ink: rgba(255, 255, 255, 0.7);
+  --danger: #ffd1cf;
+
+  /* ============================================================
+   * Typography  (design.pdf §3)
+   * ============================================================ */
+  --font-sans:
+    "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont,
+    "Noto Sans KR", system-ui, sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+  --font-serif: "Noto Serif KR", "Noto Serif", serif;
+
+  /* display 24 / 700 / 100% — "뉴스스탠드" 헤더 워드마크 */
+  --type-display-size: 24px;
+  --type-display-weight: 700;
+  --type-display-leading: 1;
+
+  /* heading 16 / 700 / 100% — 활성 탭, 기사 헤드라인 */
+  --type-heading-size: 16px;
+  --type-heading-weight: 700;
+  --type-heading-leading: 1;
+
+  /* body 16 / 500 / 22px — 비활성 탭, 오늘 날짜, 구독 라벨 */
+  --type-body-size: 16px;
+  --type-body-weight: 500;
+  --type-body-leading: 22px;
+
+  /* list-item 14 / 500 / 1.5 — 기사 리스트 행 */
+  --type-list-size: 14px;
+  --type-list-weight: 500;
+  --type-list-leading: 1.5;
+
+  /* caption 12 / 500 / 1 — 편집 시간, footnote, 구독 pill */
+  --type-caption-size: 12px;
+  --type-caption-weight: 500;
+  --type-caption-leading: 1;
+
+  /* badge 12 / 500 / 1 — 배지 카운트, 구독 pill */
+  --type-badge-size: 12px;
+  --type-badge-weight: 500;
+  --type-badge-leading: 1;
+
+  /* mono-tab 12 / 500 / 1 — 카테고리 탭 카운터 "1 / 81" */
+  --type-mono-tab-size: 12px;
+  --type-mono-tab-weight: 500;
+  --type-mono-tab-leading: 1;
+
+  /* mono-label 10 / 500 / 1 — 페이지 라벨 / 워터마크 */
+  --type-mono-label-size: 10px;
+  --type-mono-label-weight: 500;
+  --type-mono-label-leading: 1;
+
+  /* Letter-spacing */
+  --tracking-display: -0.02em; /* 한글 display */
+  --tracking-body: -0.01em; /* 한글 body */
+  --tracking-latin: 0; /* 라틴 */
+
+  /* ============================================================
+   * Spacing  (design.pdf §4 — base 8px)
+   * ============================================================ */
+  --space-4: 4px;
+  --space-8: 8px;
+  --space-12: 12px;
+  --space-16: 16px;
+  --space-24: 24px;
+  --space-32: 32px;
+  --space-40: 40px;
+  --space-48: 48px;
+  --space-64: 64px;
+
+  /* ============================================================
+   * Radii  (design.pdf §5)
+   * ============================================================ */
+  --r-0: 0;
+  --r-sub: 2px;
+  --r-pill: 14px;
+  --r-badge: 10px;
+
+  /* ============================================================
+   * Strokes & shadows  (design.pdf §5)
+   * ============================================================ */
+  --stroke: 1px solid var(--line); /* 모든 hairline */
+  --shadow-pill: 0 1px 2px rgba(20, 33, 43, 0.04); /* 시스템 내 유일한 그림자 */
+
+  /* ============================================================
+   * Layout  (design.pdf §4 — Canvas 1280×720)
+   * ============================================================ */
+  --canvas-w: 1280px;
+  --canvas-h: 720px;
+  --gutter: 175px;
+  --content-w: 930px; /* 1280 - 175 - 175 */
+}

@@ -13,13 +13,12 @@ body,
 }
 
 body {
-  font-family:
-    "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont,
-    "Noto Sans KR", system-ui, sans-serif;
-  font-size: 16px;
+  font-family: var(--font-sans);
+  font-size: var(--type-body-size);
   line-height: 1.5;
-  color: #14212b;
-  background: #fefefe;
+  letter-spacing: var(--tracking-body);
+  color: var(--ink);
+  background: var(--page);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
