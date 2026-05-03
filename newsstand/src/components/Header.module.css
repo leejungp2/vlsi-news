@@ -1,0 +1,40 @@
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 29px;
+  width: 100%;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: var(--space-8);
+}
+
+.icon {
+  width: 24px;
+  height: 24px;
+  color: var(--ink);
+  flex: none;
+}
+
+.title {
+  font-family: var(--font-sans);
+  font-size: var(--type-display-size);
+  font-weight: var(--type-display-weight);
+  line-height: var(--type-display-leading);
+  letter-spacing: var(--tracking-display);
+  color: var(--ink);
+  margin: 0;
+}
+
+.date {
+  font-family: var(--font-sans);
+  font-size: var(--type-body-size);
+  font-weight: var(--type-body-weight);
+  line-height: var(--type-body-leading);
+  letter-spacing: var(--tracking-body);
+  color: var(--sub);
+  font-variant-numeric: tabular-nums;
+}
