@@ -1,7 +1,6 @@
 import type { Press } from "../data/press";
 import { GridCell } from "./GridCell";
 import { Chevron } from "./Chevron";
-import type { PillMode } from "./SubscribePill";
 import styles from "./PressGrid.module.css";
 
 const COLS = 6;
@@ -12,8 +11,8 @@ type Props = {
   presses: Press[];
   page: number;
   pageCount: number;
-  /** 디자인 §7: 전체 탭 = "subscribe", 구독 탭 = "unsubscribe" */
-  mode: PillMode;
+  /** 현재 구독 중인 언론사 id 집합 — 각 셀의 Pill 라벨이 이 값으로 토글 */
+  subscribed: Set<string>;
   onPageChange: (next: number) => void;
   onPillClick: (pressId: string) => void;
   onOpen: (pressId: string) => void;
@@ -23,7 +22,7 @@ export function PressGrid({
   presses,
   page,
   pageCount,
-  mode,
+  subscribed,
   onPageChange,
   onPillClick,
   onOpen,
@@ -54,7 +53,7 @@ export function PressGrid({
           <GridCell
             key={press.id}
             press={press}
-            mode={mode}
+            isSubscribed={subscribed.has(press.id)}
             onPillClick={onPillClick}
             onOpen={onOpen}
           />

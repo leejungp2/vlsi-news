@@ -1,18 +1,20 @@
 import type { MouseEvent } from "react";
 import type { Press } from "../data/press";
 import { PressWordmark } from "./PressWordmark";
-import { SubscribePill, type PillMode } from "./SubscribePill";
+import { SubscribePill } from "./SubscribePill";
 import styles from "./GridCell.module.css";
 
 type Props = {
   press: Press;
-  /** 디자인 §7 cell hover states: "전체 언론사" 탭 = subscribe, "구독한 언론사" 탭 = unsubscribe */
-  mode: PillMode;
+  /** 이 언론사가 현재 구독 중인지 — Pill 라벨이 이 값에 따라 토글됨 */
+  isSubscribed: boolean;
+  /** Pill 클릭 시 — 부모에서 subscribed Set을 toggle */
   onPillClick: (pressId: string) => void;
+  /** 셀 본체(워드마크 영역) 클릭 시 — 리스트 뷰 진입 */
   onOpen: (pressId: string) => void;
 };
 
-export function GridCell({ press, mode, onPillClick, onOpen }: Props) {
+export function GridCell({ press, isSubscribed, onPillClick, onOpen }: Props) {
   /* Pill 클릭은 셀 onClick까지 전파되면 안 됨 (리스트 뷰 진입 막기) */
   const handlePillClick = (e: MouseEvent<HTMLButtonElement>) => {
     e.stopPropagation();
@@ -40,7 +42,10 @@ export function GridCell({ press, mode, onPillClick, onOpen }: Props) {
         <PressWordmark press={press} />
       </div>
       <div className={styles.pill}>
-        <SubscribePill mode={mode} onClick={handlePillClick} />
+        <SubscribePill
+          mode={isSubscribed ? "unsubscribe" : "subscribe"}
+          onClick={handlePillClick}
+        />
       </div>
     </div>
   );
