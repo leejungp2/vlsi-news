@@ -1,0 +1,39 @@
+.pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  height: 28px;
+  padding: 0 var(--space-12);
+  border-radius: var(--r-pill);
+  background: var(--card);
+  border: var(--stroke);
+  box-shadow: var(--shadow-pill);
+
+  font-family: var(--font-sans);
+  font-size: var(--type-caption-size);
+  font-weight: var(--type-caption-weight);
+  line-height: var(--type-caption-leading);
+  letter-spacing: var(--tracking-body);
+  color: var(--sub);
+}
+
+.icon {
+  width: 10px;
+  height: 10px;
+  flex: none;
+  color: var(--sub);
+}
+
+.label {
+  /* 텍스트 자체는 부모 .pill 스타일을 상속 */
+  white-space: nowrap;
+}
+
+.pill:hover {
+  border-color: var(--sub);
+}
+
+.pill:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}

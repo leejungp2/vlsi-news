@@ -3,6 +3,7 @@ import { Header } from "./components/Header";
 import { Ticker } from "./components/Ticker";
 import { PressWordmark } from "./components/PressWordmark";
 import { TabBar, type TabKey, type ViewKey } from "./components/TabBar";
+import { SubscribePill } from "./components/SubscribePill";
 import { TICKER } from "./data/ticker";
 import { PRESS_LIST } from "./data/press";
 
@@ -37,6 +38,12 @@ function App() {
         onTabChange={setTab}
         onViewChange={setView}
       />
+
+      {/* Commit 8 시각 검증 — Commit 9에서 GridCell hover/focus 안으로 들어감 */}
+      <div style={{ display: "flex", gap: 12, alignItems: "center" }}>
+        <SubscribePill mode="subscribe" onClick={() => {}} />
+        <SubscribePill mode="unsubscribe" onClick={() => {}} />
+      </div>
 
       {/* 임시 wordmark 미리보기 — Commit 9·10에서 GridCell/PressGrid로 교체 */}
       <div
