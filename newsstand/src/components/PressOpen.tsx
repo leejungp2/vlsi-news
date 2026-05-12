@@ -52,7 +52,13 @@ export function PressOpen({
         onTabClick={onCategoryChange}
       />
 
-      <div className={styles.body}>
+      {/* aria-live="polite": auto-advance로 press가 바뀔 때 SR이 새 헤드라인을 읽음.
+       * aria-atomic="true"로 부분 변경이 아니라 전체 영역을 한 번에 다시 읽게 함. */}
+      <div
+        className={styles.body}
+        aria-live="polite"
+        aria-atomic="true"
+      >
         {/* 헤드 행: 워드마크 + 편집 시간 + 구독/해지 pill */}
         <div className={styles.head}>
           <div className={styles.brand}>

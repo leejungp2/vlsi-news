@@ -5,6 +5,8 @@
   --ink: #14212b;
   --ink-alt: #14202b;
   --sub: #5f6e76;
+  /* --mute on white = ~3.4:1 — WCAG AA "large text"(≥18pt 또는 14pt bold)에만 안전.
+   * 작은 caption(12px)에는 디자인 의도상 사용하지만, 본문(14px+ regular)엔 --sub 권장. */
   --mute: #879298;
   --line: #d2dae0;
   --soft: #f5f7f9;

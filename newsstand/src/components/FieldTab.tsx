@@ -32,12 +32,17 @@ export function FieldTab({
             className={`${styles.tab} ${isActive ? styles.active : ""}`}
             onClick={() => onTabClick(cat.key)}
           >
-            {/* 활성 탭의 진행 overlay */}
+            {/* 활성 탭의 진행 overlay.
+             * SR에 진행률을 노출하려고 progressbar role + aria-valuenow 사용. */}
             {isActive && (
               <span
                 className={styles.progress}
                 style={{ width: `${Math.min(100, Math.max(0, progress))}%` }}
-                aria-hidden="true"
+                role="progressbar"
+                aria-valuemin={0}
+                aria-valuemax={100}
+                aria-valuenow={Math.round(progress)}
+                aria-label="현재 카테고리 진행도"
               />
             )}
             <span className={styles.label}>{cat.label}</span>
