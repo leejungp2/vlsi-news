@@ -1,12 +1,18 @@
+import { useState } from "react";
 import { Header } from "./components/Header";
 import { Ticker } from "./components/Ticker";
 import { PressWordmark } from "./components/PressWordmark";
+import { TabBar, type TabKey, type ViewKey } from "./components/TabBar";
 import { TICKER } from "./data/ticker";
 import { PRESS_LIST } from "./data/press";
 
 function App() {
   /** 디자인 프레임의 기준 날짜로 시각 검증. 추후 new Date()로 교체. */
   const designDate = new Date(2026, 0, 14); // 2026.01.14 (수)
+
+  /* 임시 상태 — Commit 11에서 구독 Set과 연결, Commit 16에서 <Newsstand>로 이동 */
+  const [tab, setTab] = useState<TabKey>("all");
+  const [view, setView] = useState<ViewKey>("grid");
 
   /* Commit 6 시각 검증: page 1 첫 6개 (디자인 프레임 1행)을 셀처럼 보여줌 */
   const sample = PRESS_LIST.slice(0, 6);
@@ -23,6 +29,14 @@ function App() {
     >
       <Header date={designDate} />
       <Ticker items={TICKER} />
+
+      <TabBar
+        tab={tab}
+        view={view}
+        subCount={0}
+        onTabChange={setTab}
+        onViewChange={setView}
+      />
 
       {/* 임시 wordmark 미리보기 — Commit 9·10에서 GridCell/PressGrid로 교체 */}
       <div
