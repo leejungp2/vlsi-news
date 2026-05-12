@@ -1,0 +1,26 @@
+/* chevron(24) + gap(48) + grid(930) + gap(48) + chevron(24) = 1074
+ * 캔버스(1280)에서 margin: 0 auto로 중앙 정렬 시 chevron이
+ * 디자인 좌표 left 103 / right 1153에 정확히 위치 (체크리스트 #10·#16). */
+.wrap {
+  display: flex;
+  align-items: center;
+  gap: var(--space-48);
+  width: fit-content;
+  margin: 0 auto;
+}
+
+.grid {
+  width: 930px;
+  height: 388px;
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  grid-template-rows: repeat(4, 1fr);
+  gap: 1px;
+  background: var(--line);
+  border: var(--stroke);
+}
+
+/* 빈 자리 — 흰색 카드 유지, 인터랙션 없음 */
+.empty {
+  background: var(--card);
+}

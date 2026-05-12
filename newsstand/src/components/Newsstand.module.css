@@ -1,0 +1,52 @@
+/* 1280px 미만 뷰포트에서 비례 축소.
+ * .scaler는 transform 부모, .canvas가 transform 대상. */
+.scaler {
+  width: 100vw;
+  min-height: 100vh;
+  display: flex;
+  justify-content: flex-start;
+  background: var(--page);
+}
+
+/* 디자인 캔버스 (체크리스트 #16): 1280×720 고정.
+ * 위치 절대 좌표(chevron 등)는 모두 이 캔버스 기준. */
+.canvas {
+  width: var(--canvas-w);
+  height: var(--canvas-h);
+  position: relative;
+  margin: 0 auto;
+  background: var(--page);
+}
+
+/* 상단 콘텐츠: 콘텐츠 폭 930, 좌 175 / 우 175 거터 (자동 center).
+ * 디자인 §4: top 58에서 Header 시작 → padding-top: 58. */
+.topStrip {
+  width: var(--content-w);
+  margin: 0 auto;
+  padding-top: 58px;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-40);
+}
+
+/* PressGrid(1074) / PressOpen(930) 모두 fit-content + margin auto로 캔버스 중앙.
+ * 위쪽 콘텐츠와의 간격은 디자인 시각에 맞춰 40. */
+.pressArea {
+  margin: var(--space-40) auto 0;
+  width: fit-content;
+}
+
+/* 뷰포트 < 1280: 비례 축소.
+ * vw 단위 + transform: scale로 가로/세로 함께 줄어듦. */
+@media (max-width: 1279px) {
+  .canvas {
+    transform-origin: top left;
+    transform: scale(calc(100vw / 1280));
+  }
+  /* scale 후에도 페이지 흐름이 자연스러우려면 scaler 높이도 비례 */
+  .scaler {
+    height: calc(100vw * 720 / 1280);
+    min-height: 0;
+    overflow: hidden;
+  }
+}
