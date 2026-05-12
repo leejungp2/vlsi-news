@@ -1,9 +1,8 @@
 import { useState } from "react";
 import { Header } from "./components/Header";
 import { Ticker } from "./components/Ticker";
-import { PressWordmark } from "./components/PressWordmark";
 import { TabBar, type TabKey, type ViewKey } from "./components/TabBar";
-import { SubscribePill } from "./components/SubscribePill";
+import { GridCell } from "./components/GridCell";
 import { TICKER } from "./data/ticker";
 import { PRESS_LIST } from "./data/press";
 
@@ -39,13 +38,8 @@ function App() {
         onViewChange={setView}
       />
 
-      {/* Commit 8 시각 검증 — Commit 9에서 GridCell hover/focus 안으로 들어감 */}
-      <div style={{ display: "flex", gap: 12, alignItems: "center" }}>
-        <SubscribePill mode="subscribe" onClick={() => {}} />
-        <SubscribePill mode="unsubscribe" onClick={() => {}} />
-      </div>
-
-      {/* 임시 wordmark 미리보기 — Commit 9·10에서 GridCell/PressGrid로 교체 */}
+      {/* Commit 9 시각 검증 — 1행(6칸) GridCell.
+       * Commit 10에서 PressGrid로 교체되고 6×4 페이지네이션 들어감. */}
       <div
         style={{
           display: "grid",
@@ -56,17 +50,13 @@ function App() {
         }}
       >
         {sample.map((press) => (
-          <div
-            key={press.id}
-            style={{
-              background: "var(--card)",
-              height: 96,
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-            }}
-          >
-            <PressWordmark press={press} />
+          <div key={press.id} style={{ height: 96 }}>
+            <GridCell
+              press={press}
+              mode={tab === "all" ? "subscribe" : "unsubscribe"}
+              onPillClick={(id) => console.log("pill:", id)}
+              onOpen={(id) => console.log("open:", id)}
+            />
           </div>
         ))}
       </div>
