@@ -2,9 +2,9 @@ import { useState } from "react";
 import { Header } from "./components/Header";
 import { Ticker } from "./components/Ticker";
 import { TabBar, type TabKey, type ViewKey } from "./components/TabBar";
-import { GridCell } from "./components/GridCell";
+import { PressGrid } from "./components/PressGrid";
 import { TICKER } from "./data/ticker";
-import { PRESS_LIST } from "./data/press";
+import { PRESS_LIST, PAGE_SIZE } from "./data/press";
 
 function App() {
   /** 디자인 프레임의 기준 날짜로 시각 검증. 추후 new Date()로 교체. */
@@ -13,9 +13,11 @@ function App() {
   /* 임시 상태 — Commit 11에서 구독 Set과 연결, Commit 16에서 <Newsstand>로 이동 */
   const [tab, setTab] = useState<TabKey>("all");
   const [view, setView] = useState<ViewKey>("grid");
+  const [page, setPage] = useState(0);
 
-  /* Commit 6 시각 검증: page 1 첫 6개 (디자인 프레임 1행)을 셀처럼 보여줌 */
-  const sample = PRESS_LIST.slice(0, 6);
+  /* 전체 탭 = PRESS_LIST 그대로. 구독 탭은 Commit 11에서 필터링. */
+  const presses = PRESS_LIST;
+  const pageCount = Math.max(1, Math.ceil(presses.length / PAGE_SIZE));
 
   return (
     <div
@@ -34,32 +36,22 @@ function App() {
         tab={tab}
         view={view}
         subCount={0}
-        onTabChange={setTab}
+        onTabChange={(next) => {
+          setTab(next);
+          setPage(0); // 탭 전환 시 페이지 초기화 (체크리스트 #10)
+        }}
         onViewChange={setView}
       />
 
-      {/* Commit 9 시각 검증 — 1행(6칸) GridCell.
-       * Commit 10에서 PressGrid로 교체되고 6×4 페이지네이션 들어감. */}
-      <div
-        style={{
-          display: "grid",
-          gridTemplateColumns: "repeat(6, 1fr)",
-          gap: 1,
-          background: "var(--line)",
-          border: "1px solid var(--line)",
-        }}
-      >
-        {sample.map((press) => (
-          <div key={press.id} style={{ height: 96 }}>
-            <GridCell
-              press={press}
-              mode={tab === "all" ? "subscribe" : "unsubscribe"}
-              onPillClick={(id) => console.log("pill:", id)}
-              onOpen={(id) => console.log("open:", id)}
-            />
-          </div>
-        ))}
-      </div>
+      <PressGrid
+        presses={presses}
+        page={page}
+        pageCount={pageCount}
+        mode={tab === "all" ? "subscribe" : "unsubscribe"}
+        onPageChange={setPage}
+        onPillClick={(id) => console.log("pill:", id)}
+        onOpen={(id) => console.log("open:", id)}
+      />
     </div>
   );
 }
