@@ -1,29 +1,20 @@
 /**
- * 리스트 뷰 더미 기사 데이터 (디자인 §6.13 + plan 프레임 5·6).
+ * 리스트 뷰 더미 기사 데이터 (디자인 §6.10).
  *
- * 디자인 프레임에 등장하는 두 언론사(서울경제·매일경제)만 정확히 채우고,
- * 나머지는 fallback으로 generic 헤드라인 6개 + 그라데이션을 자동 부여.
+ * 디자인 프레임 6·7에 등장하는 두 언론사(SBS Biz·아시아경제)만 정확히 채우고,
+ * 나머지는 fallback으로 generic 헤드라인 6개를 자동 부여.
+ *
+ * 헤드라인 이미지는 모두 동일한 placeholder (디자인 §6.10):
+ *   linear-gradient(135deg, #EFF1F6, #DDE3EC) + 중앙 "headline image" 텍스트
+ * 데이터에는 텍스트만 두고 색은 CSS에서 처리.
  */
 
 export type PressArticles = {
-  /** 헤드라인 이미지 자리(340×188)에 들어갈 linear-gradient 문자열 */
-  imageGradient: string;
   /** 헤드라인 이미지 아래 큰 제목 (16/700) */
   headline: string;
-  /** 우측 기사 6개 (14/500 ellipsis) */
+  /** 우측 기사 6개 (14/500 ellipsis, 3×3 정사각 bullet) */
   items: string[];
-  /** 우측 하단 footnote (12/500 mute) */
-  footnote: string;
 };
-
-const DEFAULT_GRADIENTS = [
-  "linear-gradient(135deg, #C9D6FF 0%, #E2E2E2 100%)",
-  "linear-gradient(135deg, #FFD3A5 0%, #FD6585 100%)",
-  "linear-gradient(135deg, #A1FFCE 0%, #FAFFD1 100%)",
-  "linear-gradient(135deg, #B7CFE8 0%, #2E5BBA 100%)",
-  "linear-gradient(135deg, #FCB69F 0%, #FFECD2 100%)",
-  "linear-gradient(135deg, #D9AFD9 0%, #97D9E1 100%)",
-] as const;
 
 const GENERIC_ITEMS = [
   "경제 지표 회복세… 소비자 신뢰 지수 두 달 연속 상승",
@@ -34,62 +25,51 @@ const GENERIC_ITEMS = [
   "청년 창업 지원 사업 신청 마감 임박… 자격 요건 완화",
 ];
 
-const GENERIC_FOOTNOTE = "편집국 종합 · 최신 업데이트 기준";
-
-/** 디자인 프레임 5·6에 등장하는 언론사 데이터 */
+/** 디자인 프레임 6·7에 등장하는 언론사 데이터 */
 const SEED: Record<string, PressArticles> = {
-  "seoul-economy": {
-    imageGradient: "linear-gradient(135deg, #2E5BBA 0%, #4F86E0 100%)",
-    headline: "글로벌 반도체 공급망 재편 가속… 국내 기업 수혜 기대",
+  "sbs-biz": {
+    headline: "전기요금도 이제 '알림으로 다독다독'… 생활관리 습관 확산",
     items: [
-      "산업부, 첨단 반도체 R&D 예산 30% 증액 확정",
-      "삼성·SK, 미국 현지 공장 가동률 연내 90% 회복 목표",
-      "중소 팹리스 60곳, 정부 보증 융자 자격 부여",
-      "메모리 가격 4분기 연속 상승… 업황 회복 신호",
-      "차량용 반도체 국산화율 35%까지 끌어올린다",
-      "ESS 시장 폭증… 배터리·반도체 동반 수혜",
+      "출근길 드라마 끊김 이별? 지하철 와이파이, 살짝 더 빨라졌다",
+      "\"기다림이 폭신해졌어요\" 동네 버스정류장 의자, 새 단장",
+      "데이터 걱정 내려놓기 실험… 통신사, '마음 편한 요금제' 선보여",
+      "잠들기 전에 보는 조용한 영상 한 편… OTT, 힐링 추천 기능 도입",
+      "\"길 잃지 않게 도와줄게요\" 친절해진 환승 안내 목소리",
+      "퇴근 시간 맞춰 환하게 '찰칵'… 스마트 조명, 집이 먼저 반겨준다",
     ],
-    footnote: "서울경제 · 5분 전 업데이트",
   },
-  "maeil-economy": {
-    imageGradient: "linear-gradient(135deg, #14212B 0%, #5F6E76 100%)",
-    headline: "수도권 부동산 거래량 회복… 매매가 상승 전환",
+  "asia-economy": {
+    headline: "기업, '워라밸 교육 프로그램' 자율 도입 확대",
     items: [
-      "강남 3구 아파트 거래량 전월 대비 18% 증가",
-      "전세 수급 안정세… 신규 입주 물량 분산 효과",
-      "정부, 분양가 상한제 손질 검토… 공급 확대 시그널",
-      "지방 광역시 청약 경쟁률 두 자릿수로 반등",
-      "건설사 미분양 재고 정상 수준 회복 임박",
-      "재건축 안전 진단 기준 완화 후속 입법 본격화",
+      "지자체, 소상공인 대상 친절 응대 교육 지원",
+      "직장인 스트레스 관리 위한 '마음건강 상담' 확대",
+      "생활밀착 스타트업, 직장인 대상 서비스 잇단 출시",
+      "기업문화 개선 사례 공유 확산… 자발적 참여 늘어",
+      "재택·출근 혼합 근무, 중견기업까지 확대 움직임",
+      "사내 커뮤니케이션 플랫폼 고도화 추진",
     ],
-    footnote: "매일경제 · 12분 전 업데이트",
   },
 };
 
-/** 결정적 fallback — 같은 pressId에는 항상 같은 데이터 반환 */
-function fallbackFor(pressId: string, pressName: string): PressArticles {
-  /* 문자열 → 안정적인 정수 해시 (FNV-1a 32bit, 가벼움) */
+/** 결정적 fallback — 같은 pressId에는 항상 같은 회전 시작 인덱스를 반환 */
+function fallbackFor(pressId: string): PressArticles {
+  /* FNV-1a 32bit 해시 */
   let h = 0x811c9dc5;
   for (let i = 0; i < pressId.length; i++) {
     h ^= pressId.charCodeAt(i);
     h = Math.imul(h, 0x01000193) >>> 0;
   }
-  const gradient = DEFAULT_GRADIENTS[h % DEFAULT_GRADIENTS.length];
-  /* GENERIC_ITEMS를 해시 기반으로 회전 — 언론사마다 시작점 다르게 */
   const start = h % GENERIC_ITEMS.length;
   const items = Array.from(
     { length: 6 },
     (_, i) => GENERIC_ITEMS[(start + i) % GENERIC_ITEMS.length],
   );
-  /* 헤드라인은 첫 아이템을 그대로 사용 */
-  return {
-    imageGradient: gradient,
-    headline: items[0],
-    items,
-    footnote: `${pressName} · ${GENERIC_FOOTNOTE}`,
-  };
+  return { headline: items[0], items };
 }
 
-export function getArticlesFor(pressId: string, pressName: string): PressArticles {
-  return SEED[pressId] ?? fallbackFor(pressId, pressName);
+export function getArticlesFor(pressId: string): PressArticles {
+  return SEED[pressId] ?? fallbackFor(pressId);
 }
+
+/** 디자인 §6.10 — 모든 헤드라인 이미지가 공유하는 placeholder 텍스트 */
+export const HEADLINE_IMAGE_PLACEHOLDER = "headline image";

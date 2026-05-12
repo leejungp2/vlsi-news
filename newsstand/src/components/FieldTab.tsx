@@ -21,19 +21,25 @@ export function FieldTab({
 }: Props) {
   return (
     <div className={styles.fieldtab} role="tablist" aria-label="카테고리">
-      {CATEGORIES.map((cat) => {
+      {CATEGORIES.map((cat, idx) => {
         const isActive = cat.key === activeKey;
+        const isLast = idx === CATEGORIES.length - 1;
         return (
           <button
             type="button"
             key={cat.key}
             role="tab"
             aria-selected={isActive}
-            className={`${styles.tab} ${isActive ? styles.active : ""}`}
+            className={[
+              styles.tab,
+              isActive ? styles.active : "",
+              !isLast ? styles.withDivider : "",
+            ]
+              .filter(Boolean)
+              .join(" ")}
             onClick={() => onTabClick(cat.key)}
           >
-            {/* 활성 탭의 진행 overlay.
-             * SR에 진행률을 노출하려고 progressbar role + aria-valuenow 사용. */}
+            {/* 활성 탭의 진행 overlay — role=progressbar로 SR에 진행률 노출 */}
             {isActive && (
               <span
                 className={styles.progress}
@@ -51,7 +57,10 @@ export function FieldTab({
                 className={styles.counter}
                 aria-label={`${currentInTab} / ${totalInTab}`}
               >
-                {currentInTab} / {totalInTab}
+                {/* 디자인 §6.9: 현재값 "1"은 full opacity, "/ 81"은 opacity 0.7 */}
+                <span className={styles.counterPrimary}>{currentInTab}</span>
+                <span className={styles.counterSep}>{" / "}</span>
+                <span className={styles.counterTotal}>{totalInTab}</span>
               </span>
             )}
           </button>

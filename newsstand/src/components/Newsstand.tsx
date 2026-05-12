@@ -104,6 +104,8 @@ export function Newsstand() {
   }, [view]);
 
   /* === 핸들러 === */
+  /** Pill 클릭 — 디자인 §7 tab-based: 전체 탭에선 add, 구독 탭에선 delete.
+   * 시각 피드백은 우상단 탭바 배지 카운트 변화 + (구독 탭에서) 셀이 빈 흰 칸으로 바뀜. */
   const handlePillClick = (id: string) => {
     setSubscribed((prev) => {
       const next = new Set(prev);
@@ -111,6 +113,7 @@ export function Newsstand() {
       else next.delete(id);
       return next;
     });
+    /* 구독 탭에서 마지막 항목 해지로 페이지가 비면 한 페이지 앞으로 */
     if (tab === "subscribed" && presses.length - 1 <= page * PAGE_SIZE) {
       setPage((p) => Math.max(0, p - 1));
     }

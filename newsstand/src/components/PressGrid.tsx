@@ -12,7 +12,7 @@ type Props = {
   presses: Press[];
   page: number;
   pageCount: number;
-  /** 셀의 hover/focus pill 모드 — TabBar의 tab에 의해 결정 */
+  /** 디자인 §7: 전체 탭 = "subscribe", 구독 탭 = "unsubscribe" */
   mode: PillMode;
   onPageChange: (next: number) => void;
   onPillClick: (pressId: string) => void;

@@ -4,26 +4,25 @@
   flex-direction: column;
 }
 
-/* FieldTab(40) + body(348) = 388, 그리드와 동일 높이 */
+/* FieldTab(40) + body(348) = 388 — 그리드와 동일 총 높이 */
 .body {
   width: 100%;
   height: 348px;
   background: var(--card);
   border: var(--stroke);
-  border-top: 0; /* FieldTab과 시각적으로 이어짐 (체크리스트 #13) */
+  border-top: 0; /* FieldTab과 이어짐 (디자인 §6.10) */
   padding: var(--space-24) var(--space-32);
   display: flex;
   flex-direction: column;
-  gap: var(--space-16);
 }
 
-/* === 헤드 행 === */
+/* === 헤드 행 (28px, 디자인 §6.10) === */
 .head {
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: var(--space-16);
-  height: 36px;
+  height: 28px;
   flex: none;
 }
 
@@ -34,7 +33,7 @@
   min-width: 0;
 }
 
-/* 워드마크는 §6.13에서 1.05배 살짝 키움 */
+/* 워드마크는 §6.10에서 1.05배 살짝 키움 */
 .wordmarkScale {
   display: inline-flex;
   transform: scale(1.05);
@@ -52,27 +51,44 @@
   white-space: nowrap;
 }
 
-/* === 본문 두 칼럼 === */
+/* === 본문 (flex gap 24 margin-top 4, 디자인 §6.10) === */
 .content {
-  display: grid;
-  grid-template-columns: 340px 1fr;
-  gap: var(--space-32);
+  display: flex;
+  gap: var(--space-24);
+  margin-top: var(--space-4);
   flex: 1;
   min-height: 0;
 }
 
 .left {
+  width: 340px;
+  flex: none;
   display: flex;
   flex-direction: column;
   gap: var(--space-12);
-  min-width: 0;
 }
 
+/* 헤드라인 이미지 (340×188, 디자인 §6.10):
+ * 모든 언론사 공통 — linear-gradient + 중앙 "headline image" placeholder. */
 .image {
   width: 340px;
   height: 188px;
   border-radius: var(--r-sub);
+  border: var(--stroke);
+  background: linear-gradient(135deg, #eff1f6 0%, #dde3ec 100%);
   flex: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.imageLabel {
+  font-family: var(--font-sans);
+  font-size: var(--type-list-size);
+  font-weight: var(--type-list-weight);
+  line-height: 1;
+  letter-spacing: var(--tracking-body);
+  color: var(--mute);
 }
 
 .headline {
@@ -83,7 +99,7 @@
   letter-spacing: var(--tracking-body);
   color: var(--ink);
   margin: 0;
-  /* 2줄까지만 보이도록 (디자인 프레임) */
+  /* 디자인 프레임 기준 2줄까지 */
   display: -webkit-box;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
@@ -91,6 +107,7 @@
 }
 
 .right {
+  flex: 1;
   display: flex;
   flex-direction: column;
   min-width: 0;
@@ -105,7 +122,11 @@
   gap: var(--space-8);
 }
 
+/* 기사 한 줄 (14/500 ink, ellipsis) + 3×3 정사각 bullet (디자인 §6.10).
+ * bullet은 ::before로 그리고 translateY(-4)로 텍스트 가운데 정렬. */
 .item {
+  position: relative;
+  padding-left: 14px;
   font-family: var(--font-sans);
   font-size: var(--type-list-size);
   font-weight: var(--type-list-weight);
@@ -115,6 +136,17 @@
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+}
+
+.item::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 50%;
+  width: 3px;
+  height: 3px;
+  background: var(--ink);
+  transform: translateY(-4px);
 }
 
 .item a:hover {
