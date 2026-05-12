@@ -1,0 +1,66 @@
+.fieldtab {
+  display: flex;
+  width: 100%;
+  height: 40px;
+  background: var(--soft);
+  border: var(--stroke);
+  /* PressOpen 본문과 시각적으로 이어지도록 좌우/위만 보이고 아래는 본문과 공유 */
+}
+
+/* 탭 한 개 — flex 1로 균등 분할 */
+.tab {
+  position: relative;
+  flex: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 var(--space-16);
+  height: 100%;
+  overflow: hidden; /* progress overlay가 border를 넘지 않도록 */
+
+  font-family: var(--font-sans);
+  font-size: var(--type-list-size);
+  font-weight: var(--type-list-weight);
+  line-height: 1;
+  letter-spacing: var(--tracking-body);
+  color: var(--sub);
+}
+
+/* 활성 탭 — accent 배경 + 흰 라벨 700 */
+.active {
+  background: var(--accent);
+  color: #ffffff;
+  font-weight: 700;
+}
+
+/* progress overlay (활성 탭 내부 좌→우 진행) */
+.progress {
+  position: absolute;
+  inset: 0 auto 0 0; /* top:0 right:auto bottom:0 left:0 */
+  background: var(--accent-deep);
+  transition: width 0.12s linear; /* 100ms tick에 자연스럽게 따라옴 */
+  z-index: 0;
+}
+
+/* 라벨/카운터는 overlay 위로 */
+.label,
+.counter {
+  position: relative;
+  z-index: 1;
+}
+
+/* 우측 카운터 "1 / 81" — IBM Plex Mono 12/500 */
+.counter {
+  font-family: var(--font-mono);
+  font-size: var(--type-mono-tab-size);
+  font-weight: var(--type-mono-tab-weight);
+  line-height: var(--type-mono-tab-leading);
+  letter-spacing: 0;
+  color: #ffffff;
+  font-variant-numeric: tabular-nums;
+}
+
+.tab:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: -2px;
+}
