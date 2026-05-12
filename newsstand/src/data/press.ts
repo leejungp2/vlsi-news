@@ -6,7 +6,7 @@
  * 등장하도록 그럴듯한 한국 언론사로 채워 넣음.
  */
 
-import type { CategoryKey } from "./categories";
+import { CATEGORIES, type CategoryKey } from "./categories";
 
 export type Press = {
   id: string;
@@ -335,6 +335,19 @@ export const PRESS_LIST: Press[] = [...PAGE_1, ...PAGE_2, ...PAGE_3];
 export const PRESS_BY_ID: Record<string, Press> = Object.fromEntries(
   PRESS_LIST.map((p) => [p.id, p]),
 );
+
+/**
+ * 카테고리 → 해당 카테고리에 속한 Press[] (PRESS_LIST 순서 유지).
+ * 리스트 뷰의 advance 로직(다음 언론사 = 같은 카테고리 다음 항목)에 사용.
+ * 빈 카테고리도 빈 배열로 초기화해 Record 타입을 항상 만족.
+ */
+export const PRESSES_BY_CATEGORY: Record<CategoryKey, Press[]> = (() => {
+  const acc = Object.fromEntries(
+    CATEGORIES.map((c) => [c.key, [] as Press[]]),
+  ) as Record<CategoryKey, Press[]>;
+  for (const p of PRESS_LIST) acc[p.category].push(p);
+  return acc;
+})();
 
 /** 페이지 크기 (전체 언론사 그리드는 6×4 = 24/page) */
 export const PAGE_SIZE = 24;
